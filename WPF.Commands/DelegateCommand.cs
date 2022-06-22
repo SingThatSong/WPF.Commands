@@ -43,5 +43,7 @@ namespace WPF.Commands
         /// <param name="parameter">Parameter, provided in CommandParameter attribute. Ignored.</param>
         /// <returns>If this command can be executed.</returns>
         protected override bool CanExecuteInternal(object? parameter) => canExecute == null || canExecute();
+
+        public static implicit operator DelegateCommand(Action a) => new DelegateCommand(a);
     }
 }

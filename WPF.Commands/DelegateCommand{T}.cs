@@ -78,5 +78,7 @@ namespace WPF.Commands
 
             return true;
         }
+
+        public static implicit operator DelegateCommand<T>(Action<T> a) => new DelegateCommand<T>(a);
     }
 }

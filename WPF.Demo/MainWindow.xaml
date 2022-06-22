@@ -63,7 +63,8 @@
             <Button Command="{Binding AsyncDelegateSetAndWaitCommand}" Content="Increment and wait" />
             <Button Command="{Binding AsyncDelegateSetAndWaitDisabledWhenBusyCommand}" Content="Increment and wait (Disabled when busy)" />
             <Button Command="{Binding AsyncDelegateSetAndWaitDisabledWhenBusyManualCommand}" Content="Increment and wait (Disabled when busy, manual refresh)" />
-            <Button Command="{Binding AsyncDelegateWaitAndSetCommand}" Content="Wait and increment" />
+            <Button Command="{Binding AsyncDelegateWaitAndSetCommand}" Content="Wait and increment (not disabled when busy)" />
+            <Button Command="{Binding AsyncDelegateWaitAndSetDisabledWhenBusyCommand}" Content="Wait and increment (Disabled when busy)" />
             <Button Command="{Binding AsyncDelegateExecuteOnceCommand}" Content="Execute once" />
             <Button Command="{Binding AsyncDelegateCannotExecuteCommand}" Content="Cannot execute" />
 

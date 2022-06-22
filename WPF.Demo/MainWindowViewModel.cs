@@ -26,26 +26,27 @@ namespace WPF.Demo
                 return true;
             };
 
-            DelegateSetAndWaitCommand = new DelegateCommand(DelegateSetAndWait);
-            DelegateWaitAndSetCommand = new DelegateCommand(DelegateWaitAndSet);
+            DelegateSetAndWaitCommand = (Action)DelegateSetAndWait;
+            DelegateWaitAndSetCommand = (Action)DelegateWaitAndSet;
             DelegateExecuteOnceCommand = new DelegateCommand(IncrementCount, executeOnce: true);
             DelegateCannotExecuteCommand = new DelegateCommand(null, canExecute: () => false);
             DelegateCanExecuteManuallySetAutomaticallyUpdatedCommand = new DelegateCommand(IncrementCount, canExecute: () => CanExecuteFirst);
             DelegateCanExecuteManuallySetManuallyUpdatedCommand = new DelegateCommand(IncrementCount, canExecute: () => CanExecuteSecond, refreshAutomatically: false);
-            UpdateCanExecuteCommand = new DelegateCommand(UpdateCanExecute);
-            DelegateGenericCommand = new DelegateCommand<string>(DelegateGeneric);
+            UpdateCanExecuteCommand = (Action)UpdateCanExecute;
+            DelegateGenericCommand = (Action<string>)DelegateGeneric;
 
             DelegateExceptionHandledCommand = new DelegateCommand(DelegateExceptionHandled, exceptionHandler: exception =>
             {
                 MessageBox.Show($"Exception handled locally: {exception.Message}");
                 return true;
             });
-            DelegateExceptionCommand = new DelegateCommand(DelegateExceptionHandled);
+            DelegateExceptionCommand = (Action)DelegateExceptionHandled;
 
-            AsyncDelegateSetAndWaitCommand = new AsyncDelegateCommand(AsyncDelegateSetAndWait);
-            AsyncDelegateSetAndWaitDisabledWhenBusyCommand = new AsyncDelegateCommand(AsyncDelegateSetAndWait, freezeWhenBusy: true);
-            AsyncDelegateSetAndWaitDisabledWhenBusyManualCommand = new AsyncDelegateCommand(AsyncDelegateSetAndWait, freezeWhenBusy: true, refreshAutomatically: false);
-            AsyncDelegateWaitAndSetCommand = new AsyncDelegateCommand(AsyncDelegateWaitAndSet);
+            AsyncDelegateSetAndWaitCommand = (Func<Task>)AsyncDelegateSetAndWait;
+            AsyncDelegateSetAndWaitDisabledWhenBusyCommand = new AsyncDelegateCommand(AsyncDelegateSetAndWait);
+            AsyncDelegateSetAndWaitDisabledWhenBusyManualCommand = new AsyncDelegateCommand(AsyncDelegateSetAndWait, refreshAutomatically: false);
+            AsyncDelegateWaitAndSetCommand = new AsyncDelegateCommand(AsyncDelegateWaitAndSet, freezeWhenBusy: false);
+            AsyncDelegateWaitAndSetDisabledWhenBusyCommand = new AsyncDelegateCommand(AsyncDelegateWaitAndSet);
             AsyncDelegateExecuteOnceCommand = new AsyncDelegateCommand(AsyncIncrementCount, executeOnce: true);
             AsyncDelegateCannotExecuteCommand = new AsyncDelegateCommand(null, canExecute: () => false);
             AsyncDelegateCanExecuteManuallySetAutomaticallyUpdatedCommand = new AsyncDelegateCommand(AsyncIncrementCount, canExecute: () => AsyncCanExecuteFirst);
@@ -106,7 +107,8 @@ namespace WPF.Demo
             await AsyncIncrementCount();
             await Task.Delay(2000);
         }
-
+        
+        public AsyncDelegateCommand AsyncDelegateWaitAndSetDisabledWhenBusyCommand { get; }
         public AsyncDelegateCommand AsyncDelegateWaitAndSetCommand { get; }
         private async Task AsyncDelegateWaitAndSet()
         {

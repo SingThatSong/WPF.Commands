@@ -40,5 +40,7 @@ namespace WPF.Commands
 
         /// <inheritdoc/>
         protected override async Task ExecuteAsyncInternal(object? parameter) => await execute().ConfigureAwait(false);
+
+        public static implicit operator AsyncDelegateCommand(Func<Task> a) => new AsyncDelegateCommand(a);
     }
 }

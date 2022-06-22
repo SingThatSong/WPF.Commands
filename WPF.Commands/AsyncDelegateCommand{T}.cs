@@ -74,5 +74,7 @@ namespace WPF.Commands
                 throw new InvalidOperationException($"Wrong {nameof(AsyncDelegateCommand)} parameter type");
             }
         }
+
+        public static implicit operator AsyncDelegateCommand<T>(Func<T, Task> a) => new AsyncDelegateCommand<T>(a);
     }
 }
