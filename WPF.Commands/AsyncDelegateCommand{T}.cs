@@ -65,13 +65,17 @@ namespace WPF.Commands
             {
                 await execute(tParameter).ConfigureAwait(false);
             }
-            else if (parameter == null && typeof(T).IsClass)
+            else if (parameter == null)
             {
-                await execute(default).ConfigureAwait(false);
+                var type = typeof(T);
+                if (type.IsClass || type.Name.StartsWith("Nullable"))
+                {
+                    await execute(default).ConfigureAwait(false);
+                }
             }
             else
             {
-                throw new InvalidOperationException($"Wrong {nameof(AsyncDelegateCommand)} parameter type");
+                throw new InvalidCastException($"Command parameter is {parameter?.GetType().FullName}, command expected {typeof(T).FullName}");
             }
         }
 

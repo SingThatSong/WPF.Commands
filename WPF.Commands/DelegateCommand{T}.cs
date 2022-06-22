@@ -43,13 +43,17 @@ namespace WPF.Commands
             {
                 execute(tParameter);
             }
-            else if (parameter == null && typeof(T).IsClass)
+            else if (parameter == null)
             {
-                execute(default);
+                var type = typeof(T);
+                if (type.IsClass || type.Name.StartsWith("Nullable"))
+                {
+                    execute(default);
+                }
             }
             else
             {
-                throw new InvalidCastException("Command parameter is not T");
+                throw new InvalidCastException($"Command parameter is {parameter?.GetType().FullName}, command expected {typeof(T).FullName}");
             }
         }
 
