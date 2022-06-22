@@ -110,6 +110,21 @@ namespace WPF.Commands.Tests
         }
 
         [TestMethod]
+        public async Task Execute_IntParameter_NullableParameterType_NoError()
+        {
+            var funcMock = new Mock<Func<int?, Task>>();
+            var wasError = false;
+            var asyncDelegate = new AsyncDelegateCommand<int?>(funcMock.Object, exceptionHandler: exception =>
+            {
+                wasError = true;
+                return false;
+            });
+            asyncDelegate.Execute(null);
+
+            Assert.IsFalse(wasError);
+        }
+
+        [TestMethod]
         public void Execute_ObjParameter_NullParameterType_NoError()
         {
             var funcMock = new Mock<Func<object, Task>>();
