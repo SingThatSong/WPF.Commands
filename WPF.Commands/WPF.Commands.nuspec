@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WPF.Commands</id>
+    <version>2.0.2</version>
+    <authors>Maxim Grishin</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.2" />
+      <group targetFramework="net5.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net5.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="PresentationCore" targetFramework=".NETFramework4.7.2" />
+      <frameworkAssembly assemblyName="PresentationFramework" targetFramework=".NETFramework4.7.2" />
+      <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework4.7.2" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

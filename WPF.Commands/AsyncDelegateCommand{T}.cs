@@ -25,7 +25,7 @@ namespace WPF.Commands
         public AsyncDelegateCommand(Func<T, Task> execute,
                                     Func<T, bool>? canExecute = null,
                                     bool executeOnce = false,
-                                    bool freezeWhenBusy = false,
+                                    bool freezeWhenBusy = true,
                                     bool refreshAutomatically = true,
                                     Func<Exception, bool>? exceptionHandler = null)
             : base(freezeWhenBusy, executeOnce, refreshAutomatically, exceptionHandler)
